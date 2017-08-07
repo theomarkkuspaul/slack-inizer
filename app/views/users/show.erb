@@ -1,1 +1,28 @@
 <h1>Hello, <%= @user.first_name %></h1>
+
+<ul id="quotes">
+</ul>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+  // get all quotes from API as JSON
+  $.getJSON('/quotes', function(a,b,c){
+
+    // iterate through all quote objs
+    a.forEach( function(quote) {
+
+      // Create list item element
+      var element = $('<li class="quote">');
+
+      // Populate li with quote
+      element.html(quote.content);
+
+      // add li to list of quotes
+      $('#quotes').append(element);
+    });
+  });
+});
+
+</script>
