@@ -18,6 +18,9 @@ source 'https://rubygems.org' do
   # BCrypt for password hashing
   gem 'bcrypt'
 
+  # Make HTTP requests
+  gem 'rest-client'
+
   group :development do
 
     gem 'pry'

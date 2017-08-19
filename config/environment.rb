@@ -21,6 +21,10 @@ require 'active_record'
 
 require 'pry'
 
+require 'rest-client'
+
+require 'json'
+
 require 'erb'
 
 # Some helper constants for path-centric logic
