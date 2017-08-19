@@ -1,28 +1,62 @@
+<div id="status"></div>
+
 <h1>Hello, <%= @user.first_name %></h1>
 
 <ul id="quotes">
 </ul>
 
+<h3>
+  <button id='random'>Randomise Slack</button>
+</h3>
+
+<a href="https://slack.com/oauth/authorize?client_id=221436692131.221642512117&scope=users.profile%3Awrite">Link Slack</a>
+
 <script type="text/javascript">
 
 $(document).ready(function(){
 
-  // get all quotes from API as JSON
-  $.getJSON('/quotes', function(a,b,c){
+  var Slackinizer = Slackinizer || {};
 
-    // iterate through all quote objs
-    a.forEach( function(quote) {
+  Slackinizer.retrieveQuotes = function () {
+    // get all quotes from API as JSON
+    $.getJSON('/quotes', function(a,b,c){
 
-      // Create list item element
-      var element = $('<li class="quote">');
+      // iterate through all quote objs
+      a.forEach( function(quote) {
 
-      // Populate li with quote
-      element.html(quote.content);
+        // Create list item element
+        var element = $('<li class="quote">');
 
-      // add li to list of quotes
-      $('#quotes').append(element);
+        // Populate li with quote
+        element.html(quote.content);
+
+        // add li to list of quotes
+        $('#quotes').append(element);
+      });
     });
-  });
-});
+  };
 
+  Slackinizer.bindRandomizeButton = function () {
+    // bind click event
+    $('#random').click(function(e){
+      // perform post request to '/random' endpoint
+      $.post('/random', function(resp, status, info) {
+
+        var statusEl = $('#status');
+
+        if (status == "success")
+          statusEl.html('Everything went well');
+        else
+          statusEl.html('Something went wrong!');
+      })
+    })
+  }
+
+  Slackinizer.init = function() {
+    Slackinizer.retrieveQuotes();
+    Slackinizer.bindRandomizeButton();
+  }
+
+  Slackinizer.init();
+});
 </script>
