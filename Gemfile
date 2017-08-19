@@ -15,6 +15,8 @@ source 'https://rubygems.org' do
   gem 'activerecord'
   gem 'activesupport'
 
+  # BCrypt for password hashing
+  gem 'bcrypt'
 
   group :development do
 
