@@ -9,7 +9,9 @@
   <button id='random'>Randomise Slack</button>
 </h3>
 
-<a href="https://slack.com/oauth/authorize?client_id=221436692131.221642512117&scope=users.profile%3Awrite">Link Slack</a>
+<% if user && !user.authorized? %>
+  <a href="https://slack.com/oauth/authorize?client_id=221436692131.221642512117&scope=users.profile%3Awrite">Link Slack</a>
+<% end %>
 
 <script type="text/javascript">
 
