@@ -23,6 +23,11 @@ require 'pry'
 
 require 'erb'
 
+require 'rest-client'
+
+# load different enviroments
+require_relative 'development'
+
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
 
@@ -40,9 +45,10 @@ configure do
   set :views, File.join(Sinatra::Application.root, "app", "views")
 end
 
-# Set up the controllers and helpers
+# Set up the controllers, helpers, services
 Dir[APP_ROOT.join('app', 'controllers', '*.rb')].each { |file| require file }
 Dir[APP_ROOT.join('app', 'helpers', '*.rb')].each { |file| require file }
+Dir[APP_ROOT.join('app', 'services', '*.rb')].each { |file| require file }
 
 # Set up the database and models
 require APP_ROOT.join('config', 'database')
