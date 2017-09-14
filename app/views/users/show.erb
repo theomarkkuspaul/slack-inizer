@@ -42,7 +42,7 @@ $(document).ready(function(){
     // bind click event
     $('#random').click(function(e){
       // perform post request to '/random' endpoint
-      $.post('/random', function(resp, status, info) {
+      $.post('/randomize', function(resp, status, info) {
 
         var statusEl = $('#status');
 
